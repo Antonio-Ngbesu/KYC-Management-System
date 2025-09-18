@@ -104,8 +104,8 @@ KYC System/
 
 4. **Environment setup** (optional)
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+   # Create your own .env file with your Azure credentials
+   # See documentation for required environment variables
    ```
 
 ### 🎯 Running the System

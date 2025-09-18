@@ -82,8 +82,8 @@ KYC System/
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/Antonio-Ngbesu/KYC-System---Know-Your-Customer-Management-Platform.git
-   cd KYC-System---Know-Your-Customer-Management-Platform
+   git clone https://github.com/Antonio-Ngbesu/KYC-Management-System.git
+   cd KYC-Management-System
    ```
 
 2. **Create virtual environment**

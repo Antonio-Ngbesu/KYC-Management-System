@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-A comprehensive **Know Your Customer (KYC)** management system built with modern Python technologies. This platform provides secure document processing, verification workflows, and compliance management for financial institutions and businesses requiring customer identity verification.
+A comprehensive **Know Your Customer (KYC)** management system powered by **Azure AI services** and built with modern Python technologies. This intelligent platform leverages **Azure AI Document Intelligence**, **Azure AI Vision**, **Azure AI Language**, and **Azure Blob Storage** to provide automated document processing, intelligent text extraction, and secure cloud storage for financial institutions.
 
 ## ✨ Key Features
 
@@ -17,19 +17,24 @@ A comprehensive **Know Your Customer (KYC)** management system built with modern
 - **Development Authentication System** for easy testing
 - **Account Lockout Protection** against brute force attacks
 
-### 📋 **Document Management**
+### 📋 **Intelligent Document Management**
 
-- **Multi-Format Support** (PDF, Images, Scanned Documents)
-- **Secure Upload System** with validation and virus scanning
-- **Document Versioning** and audit trails
-- **Azure Blob Storage Integration** for scalable storage
+- **Azure AI Document Intelligence** - Extract structured data from forms and documents
+- **Azure AI Vision** - OCR and document quality assessment
+- **Multi-Format AI Processing** (PDF, Images, Scanned Documents)
+- **Azure Blob Storage** - Secure, scalable cloud storage with AI processing
+- **Automated Document Classification** using Azure AI services
+- **Document Versioning** with comprehensive tracking
+- **Secure File Upload** with validation and scanning
 
-### 🔍 **KYC Processing**
+### 🔍 **AI-Powered KYC Processing**
 
-- **Automated Document Analysis** using AI/ML services
-- **Risk Assessment Engine** with configurable rules
-- **Compliance Workflow Management**
-- **Real-time Status Tracking** for customers
+- **Azure AI Document Intelligence** - Automated document extraction and form recognition
+- **Azure AI Vision** - OCR, image analysis and document quality assessment
+- **Azure AI Language** - PII detection, entity recognition and sentiment analysis
+- **Intelligent Document Processing** - Multi-format support (PDF, Images, Scanned Documents)
+- **Real-time Status Tracking** with AI-driven insights
+- **Automated Risk Assessment** using AI-powered analysis
 
 ### 📊 **Multi-Interface System**
 
@@ -38,34 +43,178 @@ A comprehensive **Know Your Customer (KYC)** management system built with modern
 - **Admin Dashboard** - System management and configuration
 - **Secure System Launcher** - Centralized access control
 
+### 🤖 **Azure AI Integration**
+
+- **Azure AI Document Intelligence** - Intelligent form recognition and data extraction
+- **Azure AI Vision** - Advanced image analysis and OCR capabilities
+- **Azure AI Language** - Natural language processing and entity recognition
+- **Azure Blob Storage** - Cloud storage with seamless AI service integration
+- **Cognitive Services APIs** - Pre-built AI capabilities for document processing
+- **Multi-Service Integration** - Unified Azure AI processing pipeline
+
 ### 🎨 **Modern UI/UX**
 
 - **Responsive Design** with modern CSS styling
-- **Real-time Updates** and notifications
-- **Interactive Dashboards** with data visualization
+- **Real-time AI Insights** and notifications
+- **Interactive Dashboards** with AI-powered analytics
 - **Professional Gradient Themes** for each interface
 
-## 🏗️ Architecture
+## 🏗️ System Architecture
+
+### 🎯 **High-Level Architecture Diagram**
+
+```mermaid
+graph TB
+    %% User Interfaces
+    subgraph "🖥️ Frontend Layer"
+        CL[🔧 System Launcher<br/>Port 8520]
+        CP[👤 Customer Portal<br/>Port 8501]
+        AD[📊 Analyst Dashboard<br/>Port 8502]
+        AM[⚙️ Admin Dashboard<br/>Port 8503]
+    end
+
+    %% API Layer
+    subgraph "🔌 API Layer"
+        API[⚡ FastAPI Server<br/>Port 8000<br/>JWT Authentication]
+    end
+
+    %% Business Logic
+    subgraph "🧠 Business Logic"
+        US[📤 Upload Service]
+        AS[🔍 Analysis Service]
+        PS[🛡️ PII Redaction]
+        AC[✅ Authenticity Checker]
+        NS[📢 Notification Service]
+    end
+
+    %% Azure AI Services
+    subgraph "🤖 Azure AI Services"
+        ADI[📋 Azure AI Document Intelligence<br/>Form Recognition & Data Extraction]
+        AV[👁️ Azure AI Vision<br/>OCR & Image Analysis]
+        AL[🗣️ Azure AI Language<br/>PII Detection & Entity Recognition]
+    end
+
+    %% Storage Layer
+    subgraph "💾 Storage Layer"
+        ABS[☁️ Azure Blob Storage<br/>Document Storage]
+        PG[(🐘 PostgreSQL<br/>Primary Database)]
+        SL[(📁 SQLite<br/>Fallback Database)]
+        RD[(🔴 Redis<br/>Cache & Sessions)]
+    end
+
+    %% Data Flow
+    CL --> API
+    CP --> API
+    AD --> API
+    AM --> API
+
+    API --> US
+    API --> AS
+    API --> PS
+    API --> AC
+    API --> NS
+
+    US --> ABS
+    AS --> ADI
+    AS --> AV
+    PS --> AL
+    AC --> ADI
+    AC --> AV
+
+    API --> PG
+    API --> SL
+    API --> RD
+    ABS --> ADI
+    ABS --> AV
+
+    %% Styling
+    classDef frontend fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef api fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef business fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef azure fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef storage fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+
+    class CL,CP,AD,AM frontend
+    class API api
+    class US,AS,PS,AC,NS business
+    class ADI,AV,AL azure
+    class ABS,PG,SL,RD storage
+```
+
+### 🔄 **Document Processing Flow**
+
+```mermaid
+sequenceDiagram
+    participant C as 👤 Customer
+    participant CP as 🖥️ Customer Portal
+    participant API as ⚡ FastAPI
+    participant ABS as ☁️ Azure Blob Storage
+    participant ADI as 📋 Azure Document Intelligence
+    participant AV as 👁️ Azure Vision
+    participant AL as 🗣️ Azure Language
+    participant DB as 🐘 Database
+    participant A as 📊 Analyst
+
+    Note over C,A: Document Upload & AI Processing Workflow
+
+    C->>CP: Upload KYC Document
+    CP->>API: POST /upload (JWT Auth)
+    API->>ABS: Store Original Document
+
+    par Parallel AI Processing
+        API->>ADI: Extract Form Data
+        ADI-->>API: Structured Data + Confidence
+    and
+        API->>AV: OCR + Quality Analysis
+        AV-->>API: Text + Image Quality Score
+    and
+        API->>AL: PII Detection + Entities
+        AL-->>API: Detected PII + Entity List
+    end
+
+    API->>DB: Store Analysis Results
+    API->>ABS: Store Processed Document
+    API-->>CP: Processing Complete
+    CP-->>C: Status Update + Document ID
+
+    Note over A,DB: Analyst Review Process
+    A->>API: GET /documents/pending
+    API->>DB: Fetch Pending Reviews
+    DB-->>API: Document List + AI Insights
+    API-->>A: Documents with AI Analysis
+
+    A->>API: POST /review/decision
+    API->>DB: Update Document Status
+    API->>C: Notification (Approved/Rejected)
+```
+
+### 📁 **Project Structure**
 
 ```
 KYC System/
 ├── 🔧 Backend (FastAPI)
 │   ├── src/api/           # REST API endpoints
-│   ├── src/auth/          # Authentication services
-│   ├── src/models/        # Data models & schemas
-│   └── src/services/      # Business logic & integrations
+│   ├── src/auth/          # JWT authentication services
+│   ├── src/models/        # Data models & database schemas
+│   ├── src/services/      # Azure AI service integrations
+│   │   ├── blob_storage.py      # Azure Blob Storage
+│   │   ├── upload_service.py    # Document upload handling
+│   │   ├── pii_redaction.py     # Azure AI Language integration
+│   │   └── authenticity_checker.py # Azure AI Document Intelligence
+│   └── src/database/      # Database configuration & models
 ├── 🖥️ Frontend (Streamlit)
 │   ├── src/ui/customer_portal.py    # Customer interface
-│   ├── src/ui/analyst_dashboard.py  # Analyst interface
-│   └── src/ui/admin_dashboard.py    # Admin interface
-├── 🧪 Testing
+│   ├── src/ui/analyst_dashboard.py  # Analyst review interface
+│   ├── src/ui/admin_dashboard.py    # System administration
+│   └── src/ui/secure_launcher.py    # Authentication & launcher
+├── 🧪 Testing & Validation
 │   ├── tests/             # Comprehensive test suite
-│   ├── test_*.py          # Integration tests
+│   ├── test_*.py          # Integration & unit tests
 │   └── debug_*.py         # Development utilities
-└── 🚀 Deployment
-    ├── secure_launcher.py  # System launcher
-    ├── requirements.txt    # Dependencies
-    └── README.md          # This file
+└── 🚀 Configuration & Deployment
+    ├── .env.example       # Environment configuration template
+    ├── requirements.txt   # Python dependencies
+    └── README.md         # This documentation
 ```
 
 ## 🚀 Quick Start
@@ -184,9 +333,16 @@ python demo_working_process.py
 
 ## 📦 Technology Stack
 
+### **Azure AI Services**
+
+- **Azure AI Document Intelligence** - Intelligent document processing and form recognition
+- **Azure AI Vision** - Image analysis and optical character recognition
+- **Azure AI Language** - Natural language processing and sentiment analysis
+- **Azure Blob Storage** - Cloud storage with AI processing integration
+
 ### **Backend**
 
-- **FastAPI** - High-performance async API framework
+- **FastAPI** - High-performance async API framework with Azure AI integration
 - **SQLAlchemy** - Database ORM with async support
 - **Alembic** - Database migration management
 - **PostgreSQL** - Primary database (SQLite fallback)
@@ -195,9 +351,9 @@ python demo_working_process.py
 
 ### **Frontend**
 
-- **Streamlit** - Interactive web applications
+- **Streamlit** - Interactive web applications powered by Azure AI
 - **Modern CSS** - Responsive design with gradients
-- **JavaScript Integration** - Enhanced interactivity
+- **JavaScript Integration** - Enhanced interactivity with AI insights
 
 ### **Security & Auth**
 
@@ -208,9 +364,10 @@ python demo_working_process.py
 
 ### **Storage & Integration**
 
-- **Azure Blob Storage** - Cloud document storage
-- **File Upload Validation** - Security scanning
-- **Database Abstraction** - Multi-database support
+- **Azure Blob Storage** - Cloud document storage with AI processing
+- **PostgreSQL/SQLite** - Flexible database support
+- **File Upload Validation** - Security scanning and validation
+- **Redis Caching** - Session management and performance optimization
 
 ## 🔒 Security Features
 

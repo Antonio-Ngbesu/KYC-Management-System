@@ -3,6 +3,10 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io/)
+[![Azure AI](https://img.shields.io/badge/Azure%20AI-Powered-0078d4.svg)](https://azure.microsoft.com/en-us/products/ai-services)
+[![Document Intelligence](https://img.shields.io/badge/Azure-Document%20Intelligence-orange.svg)](https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence)
+[![AI Vision](https://img.shields.io/badge/Azure-AI%20Vision-purple.svg)](https://azure.microsoft.com/en-us/products/ai-services/ai-vision)
+[![AI Language](https://img.shields.io/badge/Azure-AI%20Language-teal.svg)](https://azure.microsoft.com/en-us/products/ai-services/ai-language)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
